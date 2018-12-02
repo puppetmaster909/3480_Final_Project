@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PhoneScript : MonoBehaviour {
@@ -17,6 +18,12 @@ public class PhoneScript : MonoBehaviour {
     public ButtonScript numBut0;
     public ButtonScript numButStar;
     public ButtonScript numButPound;
+
+    //Generated phone number display
+    public Text generatedNumText;
+
+    //Input phone number display
+    public Text inputNumText;
 
     //Array of Button Scripts
     ButtonScript[,] buttonArray = new ButtonScript[4, 3];
@@ -101,8 +108,9 @@ public class PhoneScript : MonoBehaviour {
             }
         }
 
-        print(displayGeneratedPhoneNumber);
-        print(bareGeneratedPhoneNumber);
+        generatedNumText.text = displayGeneratedPhoneNumber;
+        inputNumText.text = "";
+
     }
 	
 	// Update is called once per frame
@@ -189,13 +197,12 @@ public class PhoneScript : MonoBehaviour {
                 }
 
                 displayPlayerPhoneNumber += buttonArray[row, col].value;
+                inputNumText.text = displayPlayerPhoneNumber;
                 numberCount++;
 
                 spaceHeld = true;
 
-                //Delete
-                //print(displayPlayerPhoneNumber);
-
+                //Check victory at 10 characters
                 if (numberCount == 10)
                 {
                     incompletePhoneNumber = false;
